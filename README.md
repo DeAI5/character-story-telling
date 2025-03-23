@@ -6,6 +6,7 @@ Creating an Application for Storytelling using NextJS and a local API for text g
 ### Getting Started
 - [x] npm install ai
 - [x] npm i @ai-sdk/openai
+- [x] npm install (to install all dependencies haha)
 - [x] Add a .env.local file with key from your openai api below:
 OPENAI_API_KEY=
 
