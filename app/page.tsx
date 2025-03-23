@@ -22,7 +22,11 @@ export default function Chat() {
   const [state, setState] = useState({
     genre: "",
     tone: "",
+    character: "", 
   });
+
+  const [characters, setCharacters] = useState<string[]>([]);
+  const [newCharacter, setNewCharacter] = useState("");
   
   const handleChange = ({
     target: { name, value },
@@ -31,6 +35,17 @@ export default function Chat() {
       ...state,
       [name]: value,
     });
+  };
+
+  const handleCharacterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setNewCharacter(e.target.value);
+  };
+
+  const addCharacter = () => {
+    if (newCharacter) {
+      setCharacters([...characters, newCharacter]);
+      setNewCharacter("");
+    }
   };
 
 
@@ -96,15 +111,35 @@ export default function Chat() {
             </div>
           </div>
 
+          {/* Adding a character */}
+          <div className="space-y-4 bg-opacity-25 bg-gray-700 rounded-lg p-4">
+            <h3 className="text-xl font-semibold">Character</h3>
+            <div className="flex flex-col space-y-2">
+              <input
+                type="text"
+                name="character"
+                placeholder="Enter a character name"
+                value={newCharacter}
+                onChange={handleCharacterChange}
+                className="p-2 rounded bg-gray-800 text-white"
+              />
+              <button onClick={addCharacter} className="bg-green-500 px-4 py-2 rounded text-white">Add Character</button>
+            </div>
+
+            <ul>
+              {characters.map((char, index) => (
+                <li key={index} className="flex justify-between bg-gray-800 p-2 rounded mt-2">
+                  <span>{char}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          {/* Adding a character */}
+
           <button
             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded disabled:opacity-50"
-            disabled={isLoading || !state.genre || !state.tone}
-            onClick={() =>
-              append({
-                role: "user",
-                content: `Generate a ${state.genre} story in a ${state.tone} tone`,
-              })
-            }
+            disabled={isLoading || !state.genre || !state.tone || characters.length === 0}
+            onClick={() => append({ role: "user", content: `Generate a ${state.genre} story in a ${state.tone} tone featuring ${characters.join(", ")}` })}
           >
             Generate Story
           </button>
