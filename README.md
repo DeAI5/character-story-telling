@@ -9,6 +9,13 @@ Creating an Application for Storytelling using NextJS and a local API for text g
 - [x] npm install (to install all dependencies haha)
 - [x] Add a .env.local file with key from your openai api below:
 OPENAI_API_KEY=
+- [x] npm run dev
+
+### Tasks
+- [x] git clone https://github.com/0xGRAV3R/story-telling-app.git character-story-telling
+- [x] Add the character field, const [characters, setCharacters]
+- [x] Add the ability to edit the characters & delete them as well
+
 
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 

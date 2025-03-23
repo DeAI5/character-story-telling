@@ -48,6 +48,15 @@ export default function Chat() {
     }
   };
 
+  const updateCharacter = (index: number, value: string) => {
+    const updatedCharacters = [...characters];
+    updatedCharacters[index] = value;
+    setCharacters(updatedCharacters);
+  };
+
+  const deleteCharacter = (index: number) => {
+    setCharacters(characters.filter((_, i) => i !== index));
+  };
 
   
 
@@ -129,11 +138,18 @@ export default function Chat() {
             <ul>
               {characters.map((char, index) => (
                 <li key={index} className="flex justify-between bg-gray-800 p-2 rounded mt-2">
-                  <span>{char}</span>
+                  <input
+                    type="text"
+                    value={char}
+                    onChange={(e) => updateCharacter(index, e.target.value)}
+                    className="p-1 rounded bg-gray-700 text-white w-full mr-2"
+                  />
+                  <button onClick={() => deleteCharacter(index)} className="bg-red-500 px-2 py-1 rounded text-white">Delete</button>
                 </li>
               ))}
             </ul>
           </div>
+
           {/* Adding a character */}
 
           <button
